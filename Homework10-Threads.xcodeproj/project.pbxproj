@@ -13,7 +13,6 @@
 		02E61E7A2375758500F8C9CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E61E782375758500F8C9CF /* LaunchScreen.storyboard */; };
 		02E61E84237577BB00F8C9CF /* ISSMyCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E61E83237577BB00F8C9CF /* ISSMyCellCollectionViewCell.swift */; };
 		02E61E862375789C00F8C9CF /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E61E852375789C00F8C9CF /* CollectionViewDataSource.swift */; };
-		02E61E8823757F4000F8C9CF /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E61E8723757F4000F8C9CF /* CollectionViewDelegate.swift */; };
 		02E61E8A23759E2200F8C9CF /* ISSAddingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E61E8923759E2200F8C9CF /* ISSAddingCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +25,6 @@
 		02E61E7B2375758500F8C9CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02E61E83237577BB00F8C9CF /* ISSMyCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSMyCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		02E61E852375789C00F8C9CF /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
-		02E61E8723757F4000F8C9CF /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
 		02E61E8923759E2200F8C9CF /* ISSAddingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSAddingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,7 +61,6 @@
 				02E61E6F2375758400F8C9CF /* AppDelegate.swift */,
 				02E61E712375758400F8C9CF /* ViewController.swift */,
 				02E61E852375789C00F8C9CF /* CollectionViewDataSource.swift */,
-				02E61E8723757F4000F8C9CF /* CollectionViewDelegate.swift */,
 				02E61E83237577BB00F8C9CF /* ISSMyCellCollectionViewCell.swift */,
 				02E61E8923759E2200F8C9CF /* ISSAddingCell.swift */,
 				02E61E762375758500F8C9CF /* Assets.xcassets */,
@@ -145,7 +142,6 @@
 			files = (
 				02E61E862375789C00F8C9CF /* CollectionViewDataSource.swift in Sources */,
 				02E61E84237577BB00F8C9CF /* ISSMyCellCollectionViewCell.swift in Sources */,
-				02E61E8823757F4000F8C9CF /* CollectionViewDelegate.swift in Sources */,
 				02E61E722375758400F8C9CF /* ViewController.swift in Sources */,
 				02E61E8A23759E2200F8C9CF /* ISSAddingCell.swift in Sources */,
 				02E61E702375758400F8C9CF /* AppDelegate.swift in Sources */,

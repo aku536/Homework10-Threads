@@ -10,8 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let dataSource = CollectionViewDataSource()
-    //let delegate = CollectionViewDelegate()
+    let cvHelper = CollectionViewDataSource()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,12 +25,9 @@ class ViewController: UIViewController {
         collectionView.register(ISSMyCellCollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
         collectionView.register(ISSAddingCell.self, forCellWithReuseIdentifier: "AddingCell")
         
-        
-        collectionView.delegate = dataSource
-        collectionView.dataSource = dataSource
-        
-        
-        
+        collectionView.delegate = cvHelper
+        collectionView.dataSource = cvHelper
+
         view.addSubview(collectionView)
     }
 

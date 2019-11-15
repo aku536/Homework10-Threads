@@ -10,7 +10,12 @@ import UIKit
 
 class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    var data = [1, 2, 3, 4]
+    
+    // MARK: - DataSource
+    private var data = [1, 2, 3, 4]
+    private let concurrentQueue = DispatchQueue(label: "com.concurrentQueue",
+                                                qos: .unspecified,
+                                                attributes: [.concurrent])
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count + 1
@@ -30,21 +35,49 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollecti
         }
     }
     
+
+    // MARK: - Delegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == (collectionView.numberOfItems(inSection: 0) - 1) {
+            // Пока задача не выполнится, этот поток заблокирован
+            concurrentQueue.async(flags: .barrier) {
+                self.addCell()
+                DispatchQueue.main.async { // Обновляем после добавления элементов
+                    collectionView.reloadData()
+                }
+            }
+        } else {
+            // Синхронное удаление
+            concurrentQueue.sync {
+                self.deleteCell(at: indexPath)
+                DispatchQueue.main.async {
+                    collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    // Добавляет 5 ячеек к последней
+    private func addCell() {
+        for _ in 0..<5 {
+            let lastNumber = self.data.last ?? 0
+            self.data.append(lastNumber + 1)
+            print(lastNumber + 1)
+        }
+    }
+    
+    // Удаление ячейки
+    private func deleteCell(at indexPath: IndexPath) {
+            self.data.remove(at: indexPath.row)
+    }
+    
+    
+    // MARK: - FlowLayoutDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size = CGSize()
         size.width = collectionView.frame.width/5
         size.height = size.width
         return size
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == (collectionView.numberOfItems(inSection: 0) - 1) {
-            data.append(data.last! + 1)
-            collectionView.reloadData()
-        } else {
-            data.remove(at: indexPath.row)
-            collectionView.reloadData()
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

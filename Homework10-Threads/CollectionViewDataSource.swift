@@ -13,9 +13,9 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollecti
     
     // MARK: - DataSource
     private var data = [1, 2, 3, 4]
-    private let concurrentQueue = DispatchQueue(label: "com.concurrentQueue",
+    private let serialQueue = DispatchQueue(label: "com.concurrentQueue",
                                                 qos: .unspecified,
-                                                attributes: [.concurrent])
+                                                attributes: [])
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count + 1
@@ -40,7 +40,7 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == (collectionView.numberOfItems(inSection: 0) - 1) {
             // Пока задача не выполнится, этот поток заблокирован
-            concurrentQueue.async(flags: .barrier) {
+            serialQueue.async(flags: .barrier) {
                 self.addCell()
                 DispatchQueue.main.async { // Обновляем после добавления элементов
                     collectionView.reloadData()
@@ -48,7 +48,7 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollecti
             }
         } else {
             // Синхронное удаление
-            concurrentQueue.sync {
+            serialQueue.sync {
                 self.deleteCell(at: indexPath)
                 DispatchQueue.main.async {
                     collectionView.reloadData()
